@@ -24,10 +24,10 @@ function App() {
   );
 }
 
-let HelloWorld = (name) =>{
+let HelloWorld = (props) =>{
   return(
     <div>
-      <p>Hello {name.name}!</p>
+      <p>Hello {props.name}!</p>
     </div>
   )
 }
