@@ -10,6 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <HelloWorld name={'Deyby'}/>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -21,6 +22,14 @@ function App() {
       </header>
     </div>
   );
+}
+
+let HelloWorld = (name) =>{
+  return(
+    <div>
+      <p>Hello {name.name}!</p>
+    </div>
+  )
 }
 
 export default App;
