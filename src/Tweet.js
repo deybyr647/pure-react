@@ -45,7 +45,6 @@ const MoreOptionsButton = () => (
 
 let Tweet = () => {
   return(
-    <>
     <div className='tweet'>
      <Avatar/>
 
@@ -61,8 +60,6 @@ let Tweet = () => {
       </div>
 
     </div>
-    
-    </>
   );
 }
 
