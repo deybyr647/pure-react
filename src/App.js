@@ -8,7 +8,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.js</code> and save to reload. <br/>
+          <Hey name='Deyby'/> <br/>
+          <Hello name='Bryan'/>
         </p>
         <a
           className="App-link"
@@ -23,4 +25,14 @@ function App() {
   );
 }
 
+
+function Hey(props){
+  return(<span>Hello, {props.name}</span>)
+}
+
+let Hello = ({name}) => {
+  return(
+    <h4> Hi, {name}</h4>
+  )
+}
 export default App;
