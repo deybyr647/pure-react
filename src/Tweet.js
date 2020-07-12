@@ -130,34 +130,37 @@ let Tweet3 = {
   timestamp: '2019-10-31 20:45:18'
 }
 
-let Comment =({comment}) =>{
-  return(
-    <div>
-      <div className='author'>{comment.author.handle}</div>
-      <div className='message'>{comment.message}</div>
-      <div className='likes'>
-        {comment.likes > 0 ? comment.likes : 'No'} likes
-      </div>
-    </div>  
-  )
+/*PropTypes*/
+
+LikeButton.propTypes = {
+  count: PropTypes.number
 }
 
-Comment.propTypes = {
-  message: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  likes: PropTypes.number
+RetweetButton.propTypes = {
+  count: PropTypes.number
 }
 
-let commentOne = {
-  author: {
-    handle: 'bryang229',
-    name: 'Bryan'
-  },
-  message: 'Bruh Moment',
-  likes: 100,
-  retweets: 15,
-  timestamp: '2020-04-20 17:35:13'
+Message.propTypes = {
+  text: PropTypes.string.isRequired
+}
 
+Time.propTypes = {
+  time: PropTypes.string.isRequired
+}
+
+NameWithHandle.propTypes = {
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    handle: PropTypes.string.isRequired
+  }).isRequired
+}
+
+Avatar.propTypes = {
+  hash: PropTypes.string.isRequired
+}
+
+Tweet.propTypes = {
+  tweet: PropTypes.object.isRequired
 }
 
 class App extends React.Component{
@@ -170,8 +173,6 @@ class App extends React.Component{
         <br/>
         <Tweet tweet={Tweet3}/>
         <br/>
-        {/*<Comment author='random' likes={9 ** 2} message="You're Gay"/>*/}
-        <Comment comment={commentOne} />
       </>  
     );
   }
