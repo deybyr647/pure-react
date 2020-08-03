@@ -3,10 +3,9 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import './Tweet.css';
 
-let Avatar = ({hash}) => {
-  let url = `https://www.gravatar.com/avatar/${hash}`
+let Avatar = ({url}) => {
   return(
-    <img src={url} 
+    <img src={url}
     className='avatar' alt='avatar'/>
   );
 }
@@ -29,7 +28,7 @@ let NameWithHandle = ({author}) => {
 
 const Time = ({time}) => {
   const timeString = moment(time).fromNow();
-  
+
   return(
     <span className='time'>{timeString}</span>
 
@@ -62,7 +61,7 @@ let getRetweetCount = (count) => {
 const LikeButton = ({count}) => (
   <span className='like-button'>
     <i className='fa fa-heart like-button'/>
-    {count > 0 && 
+    {count > 0 &&
     <span className='like-count'>
       {count}
     </span>}
@@ -73,13 +72,17 @@ const MoreOptionsButton = () => (
   <i className='fa fa-ellipsis-h more-options-button'/>
 )
 
+const DeviceID = ({device}) => (
+    <span className='deviceID'>{device}</span>
+)
+
 let Tweet = ({tweet}) => {
   return(
     <div className='tweet'>
-     <Avatar hash={tweet.gravatar}/>
+     <Avatar url={tweet.gravatar}/>
 
       <div className='content'>
-        <NameWithHandle author={tweet.author}/> 
+        <NameWithHandle author={tweet.author}/>
          <Time time={tweet.timestamp}/>
         <Message text={tweet.message}/>
         <div className='buttons'>
@@ -87,48 +90,61 @@ let Tweet = ({tweet}) => {
           <RetweetButton count={tweet.retweets}/>
           <LikeButton count={tweet.likes}/>
           <MoreOptionsButton/>
-        </div>  
+          <DeviceID device={tweet.device}/>
+        </div>
       </div>
 
     </div>
   );
 }
 
-let Tweet1 = {
-  message: 'Good morning, friends !',
-  gravatar: 'xyz',
-  author: {
-    handle: 'deybyr647',
-    name: 'Deyby'
-  },
-  likes: 2,
-  retweets: 3,
-  timestamp:'2020-07-02 12:45:07'
-}
+let tweetsArr = [
+    {
+      message: 'Good morning, friends !',
+      gravatar: 'https://cdn.auth0.com/blog/react-js/react.png',
+      author: {
+        handle: 'deybyr647',
+        name: 'Deyby'
+      },
+      likes: 2,
+      retweets: 3,
+      timestamp:'2020-07-02 12:45:07',
+      device: 'iPhone 8'
+    },
+    {
+      message: 'Fuck it, Perc 3 million time',
+      gravatar: 'https://i.ytimg.com/vi/5SbOeQp1EiI/maxresdefault.jpg',
+      author: {
+        handle: '7ven',
+        name: 'Tax Fraud God'
+      },
+      likes:4000,
+      retweets: 1500,
+      timestamp: '2019-10-31 20:45:18',
+      device: 'Louis Vuitton Microwave'
+    },
+    {
+      message: 'You cannot say Pop & 4get the Smoke',
+      gravatar: 'https://fntarizona.com/wp-content/uploads/2017/05/shutterstock_624472886.jpg',
+      author: {
+        handle: 'volumizing',
+        name: 'Divad'
+      },
+      likes: 5000,
+      retweets: 2000,
+      timestamp: '2019-08-25 15:30:18',
+      device: 'Samsung Smart Fridge'
+    }
 
-let Tweet2 = {
-  message: 'You cannot say Pop & 4get the Smoke',
-  gravatar: 'xyz',
-  author: {
-    handle: 'volumizing',
-    name: 'Divad'
-  },
-  likes: 5000,
-  retweets: 2000,
-  timestamp: '2019-08-25 15:30:18'
-}
+]
 
-let Tweet3 = {
-  message: 'Fuck it, Perc 3 million time',
-  gravatar: 'xyz',
-  author: {
-    handle: '7ven',
-    name: 'Tax Fraud God'
-  },
-  likes:4000,
-  retweets: 1500,
-  timestamp: '2019-10-31 20:45:18'
-}
+let Tweets = ({tweetsArr}) => (
+    <div className='tweetsList'>
+        {tweetsArr.map(tweetObj => (
+            <Tweet tweet={tweetObj}/>
+        ))}
+    </div>
+)
 
 /*PropTypes*/
 
@@ -163,17 +179,14 @@ Tweet.propTypes = {
   tweet: PropTypes.object.isRequired
 }
 
+Tweets.propTypes = {
+    tweetsArr: PropTypes.array.isRequired
+}
+
 class App extends React.Component{
   render(){
     return(
-      <>
-        <Tweet tweet={Tweet2}/> 
-        <br/>
-        <Tweet tweet={Tweet1}/>
-        <br/>
-        <Tweet tweet={Tweet3}/>
-        <br/>
-      </>  
+        <Tweets tweetsArr={tweetsArr}/>
     );
   }
 }
