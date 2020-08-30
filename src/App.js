@@ -1,27 +1,62 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+let Child = ({onAction, children}) => (
+  <button onClick={onAction}>
+    {children}
+  </button>
+)
+
+class CountingParent extends React.Component{
+  state = {
+    actionCount: 0
+  }
+
+  increaseCount = (action) => {
+    console.log('Child says:', action);
+
+    this.setState({
+      actionCount: this.state.actionCount + 1
+    });
+
+  }
+
+  resetCount = (action) => {
+    console.log('Child says:', action);
+
+    this.setState({
+      actionCount: 0
+    })
+  }
+
+  decreaseCount = (action) => {
+    console.log('Child says:', action);
+
+    this.setState({
+      actionCount: this.state.actionCount - 1
+    });
+  }
+
+  render(){
+    return(
+      <div>
+        <Child onAction={this.increaseCount}>Increase Counter</Child>
+        <Child onAction={this.resetCount}>Reset Counter</Child>
+        <Child onAction={this.decreaseCount}>Decrease Counter</Child>
+        <p>Clicked {this.state.actionCount} times </p>
+      </div>
+    );
+  }
+}
 
 class App extends React.Component{
   render(){
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    return(
+      <>
+      <CountingParent/>
+      <CountingParent/>
+      </>
+    )
   }
 }
 
